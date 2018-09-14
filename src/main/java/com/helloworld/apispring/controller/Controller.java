@@ -9,6 +9,7 @@ package com.helloworld.apispring.controller;
 
 import com.helloworld.apispring.model.entity.Auto;
 import com.helloworld.apispring.model.entity.Usuario;
+import com.helloworld.apispring.model.entity.Viajes;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,8 @@ public class Controller {
     private AutoServicio autoServicio;
     @Autowired
     private UsuarioServicio usuarioServicio;
+    @Autowired
+    private ViajesServicio viajesservicio;
     
     @RequestMapping(value = "/autosList/", method = RequestMethod.GET)
     public ResponseEntity<List<Auto>> obtenerAutos() {
@@ -40,12 +43,21 @@ public class Controller {
         return new ResponseEntity<List<Usuario>>(users, HttpStatus.OK);
     }
     
+    @RequestMapping(value = "/Viajeslist/", method = RequestMethod.GET)
+    public ResponseEntity<List<Viajes>> obtenerViaje() {
+        List<Viajes> viajes = viajesservicio.getAllViajes();
+        return new ResponseEntity<List<Viajes>>(viajes, HttpStatus.OK);
+    }
+    
      @RequestMapping(value = "/autoNew/", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> crearEquipo(@RequestBody Auto carroNew) {
+    public ResponseEntity<String> crearAuto(@RequestBody Auto carroNew) {
         String resultado = autoServicio.crearAuto(carroNew);
         return new ResponseEntity<String>(resultado, HttpStatus.OK);
     }
    
-    
-    
+   @RequestMapping(value = "/usuarioNew/", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> crearUsuario(@RequestBody Usuario userNew) {
+        String resultado = usuarioServicio.crearUsuario(userNew);
+        return new ResponseEntity<String>(resultado, HttpStatus.OK);
+    }      
 }

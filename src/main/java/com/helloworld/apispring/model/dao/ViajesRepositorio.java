@@ -5,23 +5,22 @@
  */
 package com.helloworld.apispring.model.dao;
 
-import com.helloworld.apispring.model.entity.Auto;
+import com.helloworld.apispring.model.entity.RankingFifa;
 import com.helloworld.apispring.model.entity.Usuario;
+import com.helloworld.apispring.model.entity.Viajes;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 /**
  *
  * @author eser
  */
 @Repository
 @Transactional
-public class UsuarioRepositorio {
-    
+public class ViajesRepositorio {
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -33,16 +32,10 @@ public class UsuarioRepositorio {
         this.sessionFactory = sessionFactory;
     }
     
-    public List<Usuario> getAllUsuario(){
-       Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Usuario.class);
+    public List<Viajes> getAllViajes(){
+       Criteria criteria = getSessionFactory().getCurrentSession().createCriteria(Viajes.class);
 //       criteria.add(Restrictions.lt("rank", 10));
 //       criteria.add(Restrictions.eq("confederation", "UEFA"));
         return criteria.list();
     } 
-
-    public long crearUsuario(Usuario userNew) {
-      getSessionFactory().getCurrentSession().save(userNew);
-              return userNew.getIdUsuario();
-    }
-    
 }
