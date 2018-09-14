@@ -36,9 +36,9 @@ public class AutoRepositorio {
         return criteria.list();
     } 
 
-//    public long crearRanking(RankingFifa rankingFifa) {
-//      getSessionFactory().getCurrentSession().save(rankingFifa);
-//              return rankingFifa.getRankId();
-//    }
+    public long crearAuto(Auto carroNew) {
+      getSessionFactory().getCurrentSession().save(carroNew);
+              return carroNew.getIdAuto();
+    }
     
 }

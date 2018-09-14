@@ -40,11 +40,11 @@ public class Controller {
         return new ResponseEntity<List<Usuario>>(users, HttpStatus.OK);
     }
     
-//     @RequestMapping(value = "/equipos/", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<String> crearEquipo(@RequestBody RankingFifa rankingFifa) {
-//        String resultado = rankingServicio.crearRanking(rankingFifa);
-//        return new ResponseEntity<String>(resultado, HttpStatus.OK);
-//    }
+     @RequestMapping(value = "/autoNew/", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> crearEquipo(@RequestBody Auto carroNew) {
+        String resultado = autoServicio.crearAuto(carroNew);
+        return new ResponseEntity<String>(resultado, HttpStatus.OK);
+    }
    
     
     

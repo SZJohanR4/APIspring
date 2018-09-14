@@ -25,9 +25,9 @@ public class AutoServicio {
         return autoRepositorio.getAllAutos();
     }
 
-//   public String crearRanking(RankingFifa rankingFifa) {
-//    long equipoId= rankingRepositorio.crearRanking(rankingFifa);
-//    return "Equipo creado con ID:"+equipoId;
-//    }
-//    
+   public String crearAuto(Auto carroNew) {
+    long equipoId= autoRepositorio.crearAuto(carroNew);
+    return "Auto creado con ID:"+equipoId;
+    }
+    
 }
