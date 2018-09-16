@@ -5,11 +5,15 @@
  */
 package com.helloworld.apispring.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -27,6 +31,11 @@ public class Usuario {
     @Column
     private Integer idUsuario;
 
+ 
+    @JsonIgnore
+    @OneToMany(mappedBy = "Usuario_idUsuario")
+    private List <Viajes>viajes;
+    
     @Column
     private String Nombre;
 

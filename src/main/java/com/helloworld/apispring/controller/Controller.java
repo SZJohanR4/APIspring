@@ -6,7 +6,7 @@
 package com.helloworld.apispring.controller;
 
 
-
+import java.util.Date;
 import com.helloworld.apispring.model.entity.Auto;
 import com.helloworld.apispring.model.entity.Usuario;
 import com.helloworld.apispring.model.entity.Viajes;
@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -59,5 +60,35 @@ public class Controller {
     public ResponseEntity<String> crearUsuario(@RequestBody Usuario userNew) {
         String resultado = usuarioServicio.crearUsuario(userNew);
         return new ResponseEntity<String>(resultado, HttpStatus.OK);
-    }      
+    }
+    
+    @RequestMapping(value = "/viajeHistory/", method = RequestMethod.GET)
+    public ResponseEntity<List<Viajes>> viajeHistory(@RequestParam ("Usuario_idUsuario") String idUsuario) {
+        List<Viajes> viajes = viajesservicio.getviajeHistory(idUsuario);
+        return new ResponseEntity<List<Viajes>>(viajes, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/viajeListFilters/", method = RequestMethod.GET)
+    public ResponseEntity<List<Viajes>> viajeListFilters() {
+        List<Viajes> viajes = viajesservicio.viajeListFilters();
+        return new ResponseEntity<List<Viajes>>(viajes, HttpStatus.OK);
+    }
+    
+     @RequestMapping(value = "/CrearViaje/", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> crearViaje(@RequestBody Viajes viaje) {
+        String resultado = viajesservicio.crear(viaje);
+        return new ResponseEntity<String>(resultado, HttpStatus.OK);
+    }
+   
+    @RequestMapping(value = "/ViajeFechaOrigenDestino", method = RequestMethod.GET)
+    public ResponseEntity<List<Viajes>> ViajeFechaOrigenDestino(@RequestParam ("Origen") String Origen,@RequestParam ("Destino") String Destino,@RequestParam ("Fecha") Date Fecha,@RequestParam ("NroAsientosViaje") String Asientos) {
+        List<Viajes> viaje =  viajesservicio.Criterios_viajes(Origen,Destino,Fecha,Asientos);
+        return new ResponseEntity<List<Viajes>>(viaje, HttpStatus.OK);
+    }
+    
+     @RequestMapping(value = "/ViajeUsuarioAuto", method = RequestMethod.GET)
+    public ResponseEntity<List<Viajes>> ViajeUsuarioAuto(@RequestParam ("idViajes") Integer idviaje,@RequestParam ("idAuto") Integer idauto,@RequestParam ("idUsuario") Integer iduser) {
+        List<Viajes> viaje =  viajesservicio.Criterios_viajes_user_auto(iduser,idauto,idviaje);
+        return new ResponseEntity<List<Viajes>>(viaje, HttpStatus.OK);
+    }
 }

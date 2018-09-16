@@ -24,7 +24,15 @@ public class Viajes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      @Column
-    private Integer IdViajes;
+    private Integer idViajes;
+    
+     @ManyToOne
+    @JoinColumn(name="idUsuario")
+    private Usuario Usuario_idUsuario;
+     
+     @ManyToOne
+    @JoinColumn(name="idAuto")
+    private Auto Auto_idAuto;
     
     @Column
     private Integer NroAsientosViaje;
@@ -47,11 +55,32 @@ public class Viajes {
     @Column
     private String Precio;
 
-    @ManyToOne
-    @JoinColumn(name="Usuario")
-    private Usuario usuario;
     
     public Viajes() {
+    }
+
+    public Integer getIdViajes() {
+        return idViajes;
+    }
+
+    public void setIdViajes(Integer idViajes) {
+        this.idViajes = idViajes;
+    }
+
+    public Usuario getUsuario_idUsuario() {
+        return Usuario_idUsuario;
+    }
+
+    public void setUsuario_idUsuario(Usuario Usuario_idUsuario) {
+        this.Usuario_idUsuario = Usuario_idUsuario;
+    }
+
+    public Auto getAuto_idAuto() {
+        return Auto_idAuto;
+    }
+
+    public void setAuto_idAuto(Auto Auto_idAuto) {
+        this.Auto_idAuto = Auto_idAuto;
     }
 
     public Integer getNroAsientosViaje() {
@@ -98,14 +127,6 @@ public class Viajes {
         return Destino;
     }
 
-    public Integer getIdViajes() {
-        return IdViajes;
-    }
-
-    public void setIdViajes(Integer IdViajes) {
-        this.IdViajes = IdViajes;
-    }
-
     public void setDestino(String Destino) {
         this.Destino = Destino;
     }
@@ -117,6 +138,8 @@ public class Viajes {
     public void setPrecio(String Precio) {
         this.Precio = Precio;
     }
+
+   
 
 
 }

@@ -5,11 +5,16 @@
  */
 package com.helloworld.apispring.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,8 +26,15 @@ public class Auto {
     @Column
     private Integer idAuto;
     
+    
+    
     @Column
     private String Marca;
+    
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "Auto_idAuto")
+    private List <Viajes>viajes;
     
     @Column
     private String Modelo;
